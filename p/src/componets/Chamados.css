@@ -1,0 +1,455 @@
+/* =====================================================================
+   Gestão de Chamados de Manutenção Predial
+   Paleta centralizada em App.css; as cores de prioridade continuam semânticas.
+   ===================================================================== */
+
+/* ---------- Layout geral ---------- */
+.App,
+.tarefa-list {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  text-align: left;
+}
+
+.App {
+  --bg: var(--app-bg);
+  --surface: var(--app-surface);
+  --text: var(--app-text);
+  --muted: var(--app-muted);
+  --border: var(--app-border);
+  --input-border: var(--app-border);
+  --primary: var(--app-action);
+  --primary-hover: var(--app-primary-hover);
+  --primary-soft: var(--app-primary-soft);
+  --accent: var(--app-accent);
+  --success: var(--app-success);
+  --success-hover: var(--app-success);
+  --success-soft: var(--app-success-soft);
+  --pendente-soft: var(--app-warning-soft);
+  --pendente-text: var(--app-warning);
+  --p0: var(--app-muted);
+  --p1: var(--app-success);
+  --p2: var(--app-primary);
+  --p3: var(--app-warning);
+  --p4: #c2410c;
+  --p5: var(--app-danger);
+  --radius: var(--app-radius);
+  --shadow: var(--app-shadow);
+
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: clamp(16px, 4vw, 40px);
+  background: var(--bg);
+  color: var(--text);
+  font-family: inherit;
+}
+
+/* ---------- Nav ---------- */
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 18px 20px;
+  background: var(--app-action);
+  color: #ffffff;
+  border-radius: var(--radius);
+  border-bottom: 4px solid var(--app-accent);
+  box-shadow: var(--shadow);
+}
+
+.nav h1 {
+  margin: 0;
+  font-size: clamp(1.1rem, 4vw, 1.6rem);
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.nav p {
+  align-self: flex-start;
+  margin: 0;
+  padding: 2px 10px;
+  background: var(--app-accent-strong);
+  color: #ffffff;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
+/* ---------- Formulário (Register) ---------- */
+.Register {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: var(--shadow);
+  border-top: 4px solid var(--primary);
+}
+
+.Register h2 {
+  margin: 0 0 4px;
+  font-size: 1.25rem;
+  color: var(--primary);
+}
+
+.Register .ajuda {
+  margin: 0 0 16px;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.Register form {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+/* ---------- Campos (usados no formulário e no card) ---------- */
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.campo label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.obrigatorio::after {
+  content: ' *';
+  color: var(--p5);
+}
+
+.campo input,
+.campo select,
+.campo textarea {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 12px;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--input-border);
+  border-radius: 8px;
+  font: inherit;
+  font-size: 1rem; /* evita zoom automático no iOS */
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.campo textarea {
+  min-height: 96px;
+  resize: vertical;
+}
+
+.campo input::placeholder,
+.campo textarea::placeholder {
+  color: var(--muted);
+}
+
+.campo input:focus,
+.campo select:focus,
+.campo textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.2);
+}
+
+.campo input:user-invalid,
+.campo select:user-invalid,
+.campo textarea:user-invalid {
+  border-color: var(--p5);
+}
+
+/* ---------- Botões ---------- */
+.acoes {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.botao-primario,
+.botao-secundario,
+.botao-concluir {
+  min-height: 44px; /* área de toque confortável no celular */
+  padding: 10px 18px;
+  border-radius: 8px;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+}
+
+.botao-primario,
+.botao-concluir {
+  border: none;
+  color: #ffffff;
+}
+
+.botao-primario {
+  background: var(--primary);
+}
+
+.botao-primario:hover {
+  background: var(--primary-hover);
+}
+
+.botao-secundario {
+  background: transparent;
+  color: var(--primary);
+  border: 1px solid var(--primary);
+}
+
+.botao-secundario:hover {
+  background: var(--primary-soft);
+}
+
+.botao-concluir {
+  width: 100%;
+  background: var(--success);
+}
+
+.botao-concluir:hover {
+  background: var(--success-hover);
+}
+
+.botao-primario:active,
+.botao-secundario:active,
+.botao-concluir:active {
+  transform: scale(0.98);
+}
+
+button:focus-visible,
+summary:focus-visible,
+.check input:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ---------- Lista de chamados ---------- */
+.tarefa-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+  align-items: start; /* cada details abre sem esticar os vizinhos */
+  gap: 16px;
+  margin-top: 24px;
+  margin-bottom: 40px;
+}
+
+.tarefa-list:empty::before {
+  content: 'Nenhum chamado registrado ainda.';
+  grid-column: 1 / -1;
+  padding: 24px;
+  text-align: center;
+  color: var(--muted);
+  border: 2px dashed var(--input-border);
+  border-radius: var(--radius);
+}
+
+/* ---------- Card (details) ---------- */
+.card {
+  --prio: var(--p0);
+  --prio-texto: #ffffff;
+
+  box-sizing: border-box;
+  padding: 14px 18px;
+  background: var(--surface);
+  border-radius: var(--radius);
+  border-left: 6px solid var(--prio);
+  box-shadow: var(--shadow);
+  transition: box-shadow 0.2s;
+}
+
+.card[data-prioridade='1'] { --prio: var(--p1); }
+.card[data-prioridade='2'] { --prio: var(--p2); }
+.card[data-prioridade='3'] { --prio: var(--p3); --prio-texto: #1f2937; }
+.card[data-prioridade='4'] { --prio: var(--p4); }
+.card[data-prioridade='5'] { --prio: var(--p5); }
+
+.card:hover,
+.card[open] {
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.1), 0 8px 20px rgba(15, 23, 42, 0.08);
+}
+
+/* Cabeçalho clicável */
+.card summary {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding-right: 28px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.card summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Seta que gira ao abrir */
+.card summary::after {
+  content: '';
+  position: absolute;
+  top: 8px;
+  right: 4px;
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid var(--muted);
+  border-bottom: 2px solid var(--muted);
+  transform: rotate(45deg);
+  transition: transform 0.2s;
+}
+
+.card[open] summary::after {
+  transform: translateY(4px) rotate(225deg);
+}
+
+.card-titulo {
+  flex: 1 1 100%;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text);
+  overflow-wrap: anywhere;
+}
+
+/* Badges */
+.badge {
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.badge-prioridade {
+  background: var(--prio);
+  color: var(--prio-texto);
+}
+
+.badge-status {
+  background: var(--pendente-soft);
+  color: var(--pendente-text);
+}
+
+/* Corpo do card */
+.card-corpo {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+}
+
+.card-info {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+}
+
+.card-info dt {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.card-info dd {
+  margin: 2px 0 0;
+  font-size: 0.92rem;
+  color: var(--text);
+  overflow-wrap: anywhere;
+}
+
+.check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.check input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--success);
+  cursor: pointer;
+}
+
+/* Chamado concluído: tudo muda para verde */
+.card[data-concluido='true'] {
+  border-left-color: var(--success);
+  background: var(--success-soft);
+}
+
+.card[data-concluido='true'] .badge-status {
+  background: var(--success-soft);
+  color: var(--success);
+}
+
+/* ---------- Responsividade ---------- */
+@media (min-width: 640px) {
+  .nav {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav p {
+    align-self: auto;
+  }
+
+  .Register {
+    padding: 28px;
+  }
+
+  .Register form {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .campo-largo,
+  .acoes {
+    grid-column: 1 / -1;
+  }
+
+  .acoes {
+    flex-direction: row;
+  }
+
+  .acoes button {
+    min-width: 160px;
+  }
+}
+
+@media (max-width: 480px) {
+  .App {
+    gap: 14px;
+    padding: 12px;
+  }
+
+  .Register {
+    padding: 16px;
+  }
+
+  .card {
+    padding: 12px 14px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .tarefa-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+}
